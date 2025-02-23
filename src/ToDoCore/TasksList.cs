@@ -4,9 +4,13 @@ public class TasksList
 {
     private List<Task> _tasks = new();
 
-    public void AddTask(string title)
+    public Task AddTask(string title)
     {
-        _tasks.Add(new Task(title));
+        var task = new Task(title);
+        
+        _tasks.Add(task);
+
+        return task;
     }
 
     public void RemoveTask(Guid id)
