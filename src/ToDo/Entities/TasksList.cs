@@ -4,13 +4,13 @@ public class TasksList
 {
     private List<Task> _tasks = new();
 
-    public Task AddTask(string title)
+    public Guid AddTask(string title)
     {
         var task = new Task(title);
         
         _tasks.Add(task);
 
-        return task;
+        return task.Id;
     }
 
     public void RemoveTask(Guid id)
@@ -24,7 +24,7 @@ public class TasksList
         task.IsCompleted = true;
     }
 
-    public List<Task> GetTasks()
+    public IReadOnlyCollection<Task> GetTasks()
     {
         return _tasks;
     }
