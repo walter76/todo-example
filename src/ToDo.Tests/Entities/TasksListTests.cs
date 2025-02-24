@@ -1,20 +1,21 @@
 namespace ToDo.Tests.Entities;
 
 using ToDo.Entities;
+using ToDo.Infrastructure;
 
 public class TasksListTests
 {
     [Test]
     public void NewlyCreatedTasksListShouldBeEmpty()
     {
-        var tasksList = new TasksList();
+        var tasksList = new TasksList(new InMemoryTasksRepository());
         Assert.That(tasksList.GetTasks().Count, Is.Zero);
     }
 
     [Test]
     public void AddTaskShouldAddNewTask()
     {
-        var tasksList = new TasksList();
+        var tasksList = new TasksList(new InMemoryTasksRepository());
 
         var taskId = tasksList.AddTask("Test task");
 
@@ -25,7 +26,7 @@ public class TasksListTests
     [Test]
     public void RemoveTaskShouldDeleteTask()
     {
-        var tasksList = new TasksList();
+        var tasksList = new TasksList(new InMemoryTasksRepository());
         var taskId = tasksList.AddTask("Test task");
 
         tasksList.RemoveTask(taskId);
@@ -36,7 +37,7 @@ public class TasksListTests
     [Test]
     public void GetTaskShouldReturnTask()
     {
-        var tasksList = new TasksList();
+        var tasksList = new TasksList(new InMemoryTasksRepository());
         var taskId = tasksList.AddTask("Test task");
 
         var task = tasksList.GetTask(taskId);
@@ -48,8 +49,8 @@ public class TasksListTests
     [Test]
     public void GetTaskShouldReturnNullIfTaskNotFound()
     {
-        var tasksList = new TasksList();
-        
+        var tasksList = new TasksList(new InMemoryTasksRepository());
+
         var task = tasksList.GetTask(Guid.NewGuid());
         
         Assert.That(task, Is.Null);
@@ -58,7 +59,7 @@ public class TasksListTests
     [Test]
     public void CompleteTaskShouldCompleteTask()
     {
-        var tasksList = new TasksList();
+        var tasksList = new TasksList(new InMemoryTasksRepository());
         var taskId = tasksList.AddTask("Test task");
 
         tasksList.CompleteTask(taskId);

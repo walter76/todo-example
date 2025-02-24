@@ -1,36 +1,46 @@
 namespace ToDo.Entities;
 
+using ToDo.Adapters;
+
 public class TasksList
 {
-    private List<Task> _tasks = new();
+    private ITasksRepository _tasksRepository;
+
+    public TasksList(ITasksRepository tasksRepository)
+    {
+        _tasksRepository = tasksRepository;
+    }
 
     public Guid AddTask(string title)
     {
         var task = new Task(title);
         
-        _tasks.Add(task);
+        _tasksRepository.CreateTask(task);
 
         return task.Id;
     }
 
     public void RemoveTask(Guid id)
     {
-        _tasks.RemoveAll(t => t.Id == id);
+        _tasksRepository.DeleteTask(id);
     }
 
     public void CompleteTask(Guid id)
     {
-        var task = _tasks.Find(t => t.Id == id);
+        var task = _tasksRepository.FindTask(id);
+
         task.IsCompleted = true;
+
+        _tasksRepository.UpdateTask(task);
     }
 
     public Task GetTask(Guid id)
     {
-        return _tasks.Find(t => t.Id == id);
+        return _tasksRepository.FindTask(id);
     }
-    
+
     public IReadOnlyCollection<Task> GetTasks()
     {
-        return _tasks;
+        return _tasksRepository.GetTasks();
     }
 }
