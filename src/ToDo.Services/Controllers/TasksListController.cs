@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using ToDo.Entities;
-using ToDo.Infrastructure;
 
 namespace ToDo.Services.Controllers;
 
