@@ -1,4 +1,6 @@
-namespace ToDo.Tests;
+namespace ToDo.Tests.Entities;
+
+using ToDo.Entities;
 
 public class TasksListTests
 {
