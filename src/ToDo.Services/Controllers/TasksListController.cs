@@ -1,7 +1,7 @@
-using Microsoft.AspNetCore.Mvc;
-using ToDo.Entities;
-
 namespace ToDo.Services.Controllers;
+
+using Microsoft.AspNetCore.Mvc;
+using ToDo.Services.Impl;
 
 [ApiController]
 [Route("[controller]")]
@@ -9,28 +9,23 @@ public class TasksListController : ControllerBase
 {
     private readonly ILogger<TasksListController> _logger;
 
-    private TasksList _tasksList;
+    private TasksListService _tasksListService;
 
-    public TasksListController(ILogger<TasksListController> logger, TasksList tasksList)
+    public TasksListController(ILogger<TasksListController> logger, TasksListService tasksListService)
     {
         _logger = logger;
-        _tasksList = tasksList;
-
-        _logger.LogInformation("TasksListController created");
+        _tasksListService = tasksListService;
     }
 
     [HttpPost]
     public ActionResult<TaskDTO> CreateTask([FromQuery] string title)
     {
-        var taskId = _tasksList.AddTask(title);
-
-        var task = _tasksList.GetTask(taskId);
-        return new TaskDTO(task);
+        return _tasksListService.CreateTask(title);
     }
 
     [HttpGet]
     public IEnumerable<TaskDTO> GetTasks()
     {
-        return _tasksList.GetTasks().Select(task => new TaskDTO(task));
+        return _tasksListService.GetTasks();
     }
 }

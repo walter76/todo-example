@@ -2,6 +2,7 @@
 using ToDo.Adapters;
 using ToDo.Entities;
 using ToDo.Infrastructure;
+using ToDo.Services.Impl;
 
 namespace ToDo.Services;
 
@@ -16,6 +17,7 @@ public class Program
         builder.Services.AddControllers();
         builder.Services.AddSingleton<ITasksRepository, InMemoryTasksRepository>();
         builder.Services.AddSingleton<TasksList>();
+        builder.Services.AddSingleton<TasksListService>();
 
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
