@@ -12,10 +12,12 @@ public class TasksListController : ControllerBase
 
     private TasksList _tasksList;
 
-    public TasksListController(ILogger<TasksListController> logger)
+    public TasksListController(ILogger<TasksListController> logger, TasksList tasksList)
     {
         _logger = logger;
-        _tasksList = new TasksList(new InMemoryTasksRepository());
+        _tasksList = tasksList;
+
+        _logger.LogInformation("TasksListController created");
     }
 
     [HttpPost]
@@ -25,5 +27,11 @@ public class TasksListController : ControllerBase
 
         var task = _tasksList.GetTask(taskId);
         return new TaskDTO(task);
+    }
+
+    [HttpGet]
+    public IEnumerable<TaskDTO> GetTasks()
+    {
+        return _tasksList.GetTasks().Select(task => new TaskDTO(task));
     }
 }
