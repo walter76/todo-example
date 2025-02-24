@@ -24,7 +24,7 @@ public class TasksListTests
         var tasksList = new TasksList();
         var task = tasksList.AddTask("Test task");
 
-        tasksList.Remove(task.Id);
+        tasksList.RemoveTask(task.Id);
         
         Assert.That(tasksList.GetTasks().Count, Is.Zero);
     }
