@@ -15,7 +15,7 @@ public class TasksListTests
     public void AddTaskShouldAddNewTask()
     {
         var tasksList = new TasksList();
-        
+
         var taskId = tasksList.AddTask("Test task");
 
         Assert.That(tasksList.GetTasks().Count, Is.EqualTo(1));
@@ -31,5 +31,39 @@ public class TasksListTests
         tasksList.RemoveTask(taskId);
         
         Assert.That(tasksList.GetTasks().Count, Is.Zero);
+    }
+
+    [Test]
+    public void GetTaskShouldReturnTask()
+    {
+        var tasksList = new TasksList();
+        var taskId = tasksList.AddTask("Test task");
+
+        var task = tasksList.GetTask(taskId);
+        
+        Assert.That(task.Id, Is.EqualTo(taskId));
+        Assert.That(task.Title, Is.EqualTo("Test task"));
+    }
+
+    [Test]
+    public void GetTaskShouldReturnNullIfTaskNotFound()
+    {
+        var tasksList = new TasksList();
+        
+        var task = tasksList.GetTask(Guid.NewGuid());
+        
+        Assert.That(task, Is.Null);
+    }
+
+    [Test]
+    public void CompleteTaskShouldCompleteTask()
+    {
+        var tasksList = new TasksList();
+        var taskId = tasksList.AddTask("Test task");
+
+        tasksList.CompleteTask(taskId);
+
+        var task = tasksList.GetTask(taskId);
+        Assert.That(task.IsCompleted, Is.True);
     }
 }

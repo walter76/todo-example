@@ -24,6 +24,11 @@ public class TasksList
         task.IsCompleted = true;
     }
 
+    public Task GetTask(Guid id)
+    {
+        return _tasks.Find(t => t.Id == id);
+    }
+    
     public IReadOnlyCollection<Task> GetTasks()
     {
         return _tasks;
