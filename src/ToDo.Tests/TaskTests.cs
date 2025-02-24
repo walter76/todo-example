@@ -1,4 +1,4 @@
-﻿namespace ToDoCore.Tests;
+﻿namespace ToDo.Tests;
 
 public class TaskTests
 {

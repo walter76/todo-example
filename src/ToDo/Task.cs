@@ -1,4 +1,4 @@
-﻿namespace ToDoCore;
+﻿namespace ToDo;
 
 public class Task
 {
