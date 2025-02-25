@@ -1,7 +1,6 @@
 namespace ToDo.Services.Controllers;
 
 using Microsoft.AspNetCore.Mvc;
-using ToDo.Services.Impl;
 
 [ApiController]
 [Route("[controller]")]
@@ -9,9 +8,9 @@ public class TasksListController : ControllerBase
 {
     private readonly ILogger<TasksListController> _logger;
 
-    private TasksListService _tasksListService;
+    private ITasksListService _tasksListService;
 
-    public TasksListController(ILogger<TasksListController> logger, TasksListService tasksListService)
+    public TasksListController(ILogger<TasksListController> logger, ITasksListService tasksListService)
     {
         _logger = logger;
         _tasksListService = tasksListService;

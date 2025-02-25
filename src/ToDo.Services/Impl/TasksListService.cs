@@ -1,17 +1,18 @@
 namespace ToDo.Services.Impl;
 
 using ToDo.Entities;
+using ToDo.Infrastructure;
 
-public class TasksListService
+public class TasksListService : ITasksListService
 {
     private readonly ILogger<TasksListService> _logger;
 
     private TasksList _tasksList;
 
-    public TasksListService(ILogger<TasksListService> logger, TasksList tasksList)
+    public TasksListService(ILogger<TasksListService> logger)
     {
         _logger = logger;
-        _tasksList = tasksList;
+        _tasksList = new TasksList(new InMemoryTasksRepository());
     }
 
     public TaskDTO CreateTask(string title)
