@@ -1,9 +1,10 @@
-namespace ToDo.Services.Controllers;
+namespace ToDo.Services.V1.Controllers;
 
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/v{version:apiVersion}/[controller]")]
+[ApiVersion("1.0")]
 public class TasksListController : ControllerBase
 {
     private readonly ILogger<TasksListController> _logger;
