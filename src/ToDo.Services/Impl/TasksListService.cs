@@ -27,4 +27,14 @@ public class TasksListService : ITasksListService
     {
         return _tasksList.GetTasks().Select(task => new TaskDTO(task));
     }
+
+    public TaskDTO CompleteTask(string id)
+    {
+        var taskId = Guid.Parse(id);
+        
+        _tasksList.CompleteTask(taskId);
+
+         var task = _tasksList.GetTask(taskId);
+       return new TaskDTO(task);
+    }
 }

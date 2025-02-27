@@ -28,4 +28,10 @@ public class TasksListController : ControllerBase
     {
         return _tasksListService.GetTasks();
     }
+
+    [HttpPut]
+    public ActionResult<TaskDTO> CompleteTask([FromQuery] string id)
+    {
+        return _tasksListService.CompleteTask(id);
+    }
 }
