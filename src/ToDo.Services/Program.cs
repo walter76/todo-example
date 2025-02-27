@@ -22,7 +22,7 @@ public class Program
         {
             options.ReportApiVersions = true;
             options.AssumeDefaultVersionWhenUnspecified = true;
-            options.DefaultApiVersion = new ApiVersion(1, 0);
+            options.DefaultApiVersion = new ApiVersion(1, 1);
         });
 
         builder.Services.AddVersionedApiExplorer(options =>

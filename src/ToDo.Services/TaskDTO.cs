@@ -1,10 +1,14 @@
 namespace ToDo.Services;
 
+using System.ComponentModel.DataAnnotations;
+using Swashbuckle.AspNetCore.Annotations;
 using ToDo.Entities;
 
 public class TaskDTO
 {
-    public Guid? Id { get; set; }
+    [Required]
+    [SwaggerSchema("The unique identifier for the task")]
+    public Guid Id { get; set; }
     public string Title { get; set; }
     public bool IsCompleted { get; set; }
 

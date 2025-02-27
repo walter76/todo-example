@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
 [Route("api/v{version:apiVersion}/[controller]")]
-[ApiVersion("1.0")]
+[ApiVersion("1.1")]
 public class TasksListController : ControllerBase
 {
     private readonly ILogger<TasksListController> _logger;
